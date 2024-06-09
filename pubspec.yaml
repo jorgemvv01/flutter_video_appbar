@@ -1,0 +1,17 @@
+name: video_appbar
+description: This package allows the creation of AppBar with customizable embedded videos.
+version: 0.0.1
+repository: https://github.com/jorgemvv01/flutter_video_appbar
+
+
+environment:
+  sdk: '>=3.4.1 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  video_player: ^2.8.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter

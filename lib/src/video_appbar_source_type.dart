@@ -1,0 +1,1 @@
+enum SourceType {assetSource, networkSource, fileSource}
