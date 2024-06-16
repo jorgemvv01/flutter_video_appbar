@@ -1,3 +1,6 @@
+/// Custom exception for the `VideoAppBar`.
+///
+/// Thrown when there is an error with the video controller.
 class VideoAppbarException implements Exception {
   final String message;
 
