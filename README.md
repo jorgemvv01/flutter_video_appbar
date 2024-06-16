@@ -1,7 +1,7 @@
 # VideoAppBar for Flutter
 
 [![pub package](https://img.shields.io/pub/v/video_appbar.svg)](https://pub.dev/packages/video_appbar)
-![coverage](https://img.shields.io/badge/coverage-+90%-green)
+![coverage](https://img.shields.io/badge/coverage-+90-green)
 
 A Flutter package that allows playing videos within the AppBar, and customizing each of its components.
 
@@ -13,12 +13,12 @@ A Flutter package that allows playing videos within the AppBar, and customizing 
 
 Mobile - Android        |  Mobile - Android (with leading)
 :-------------------------:|:-------------------------:
-![](https://github.com/jorgemvv01/flutter_video_appbar/blob/main/res/demo_01.gif)  |  ![](https://github.com/jorgemvv01/flutter_video_appbar/blob/main/res/demo_02.gif)
+![mobile android demo](https://github.com/jorgemvv01/flutter_video_appbar/blob/main/res/demo_01.gif)  |  ![mobile android demo](https://github.com/jorgemvv01/flutter_video_appbar/blob/main/res/demo_02.gif)
 
 
 Tablet - Android         |
 :-------------------------:|
-![](https://github.com/jorgemvv01/flutter_video_appbar/blob/main/res/demo_03.gif)  |  
+![tablet android demo](https://github.com/jorgemvv01/flutter_video_appbar/blob/main/res/demo_03.gif)  |  
 
 ## Installation
 
