@@ -14,7 +14,7 @@ class VideoAppBarSource {
 
   /// Constructor for asset source.
   /// You need to specify the [dataSource] where the video is located.
-  /// 
+  ///
   /// **Usage Example:**
   /// ```dart
   /// VideoAppBarSource.asset(
@@ -23,54 +23,48 @@ class VideoAppBarSource {
   /// ```
   VideoAppBarSource.asset({
     required String dataSource,
-  })
-  : _sourceType = SourceType.assetSource,
-    _dataSource = dataSource,
-    _httpHeaders = {},
-    _file = null;
+  })  : _sourceType = SourceType.assetSource,
+        _dataSource = dataSource,
+        _httpHeaders = {},
+        _file = null;
 
   /// Constructor for network source.
   /// You can specify the [URL] of the video and if necessary you can also place [httpHeaders].
-  /// 
+  ///
   /// **Usage Example:**
   /// ```dart
   /// VideoAppBarSource.network(
   ///   url: 'https://github.com/jorgemvv01/flutter_video_appbar/example/res/videos/video_01.mp4'),
   /// )
   /// ```
-  VideoAppBarSource.network({
-    required String url,
-    httpHeaders = const <String, String>{}
-  }) 
-  : 
-    _sourceType = SourceType.networkSource,
-    _httpHeaders = httpHeaders,
-    _dataSource = url,
-    _file = null;
+  VideoAppBarSource.network(
+      {required String url, httpHeaders = const <String, String>{}})
+      : _sourceType = SourceType.networkSource,
+        _httpHeaders = httpHeaders,
+        _dataSource = url,
+        _file = null;
 
   /// Constructor for file source.
   /// You need to specify the [File] with the path to the video file
   /// and if necessary you can also place [httpHeaders].
-  /// 
+  ///
   /// `IMPORTANT:` do not use this option for WEB platform.
-  /// 
+  ///
   /// **Usage Example:**
   /// ```dart
   /// VideoAppBarSource.file(
   ///   file: File('your_path/video_01.mp4'),
   /// )
   /// ```
-  VideoAppBarSource.file({
-    required File file,
-    httpHeaders = const <String, String>{}
-  })
-  : _sourceType = SourceType.fileSource,
-    _dataSource = Uri.file(file.absolute.path).toString(),
-    _file = file,
-    _httpHeaders = httpHeaders;
+  VideoAppBarSource.file(
+      {required File file, httpHeaders = const <String, String>{}})
+      : _sourceType = SourceType.fileSource,
+        _dataSource = Uri.file(file.absolute.path).toString(),
+        _file = file,
+        _httpHeaders = httpHeaders;
 
   String get dataSource => _dataSource;
   SourceType get sourceType => _sourceType;
   File? get file => _file;
-  Map<String, String>  get httpHeaders => _httpHeaders;
+  Map<String, String> get httpHeaders => _httpHeaders;
 }

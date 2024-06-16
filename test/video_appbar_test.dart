@@ -10,13 +10,15 @@ import 'package:video_player_platform_interface/video_player_platform_interface.
 
 void main() {
   group('VideoAppBar Tests', () {
-    setUp((){
+    setUp(() {
       TestWidgetsFlutterBinding.ensureInitialized();
-      final FakeVideoPlayerPlatform fakeVideoPlayerPlatform = FakeVideoPlayerPlatform();
+      final FakeVideoPlayerPlatform fakeVideoPlayerPlatform =
+          FakeVideoPlayerPlatform();
       VideoPlayerPlatform.instance = fakeVideoPlayerPlatform;
     });
-    
-    testWidgets('VideoAppBar displays video from asset with error', (WidgetTester tester) async {
+
+    testWidgets('VideoAppBar displays video from asset with error',
+        (WidgetTester tester) async {
       FlutterErrorDetails? capturedError;
 
       FlutterError.onError = (FlutterErrorDetails details) {
@@ -31,7 +33,9 @@ void main() {
               actions: [IconButton(icon: Icon(Icons.share), onPressed: () {})],
               errorPlaceholder: Center(child: Text('Placeholder')),
               loading: Center(child: CircularProgressIndicator()),
-              leading: IconButton(icon: Icon(Icons.arrow_back_ios_new_outlined), onPressed: () {}),
+              leading: IconButton(
+                  icon: Icon(Icons.arrow_back_ios_new_outlined),
+                  onPressed: () {}),
               gradient: LinearGradient(
                 colors: [Colors.black.withOpacity(0.5), Colors.transparent],
                 begin: Alignment.bottomCenter,
@@ -47,14 +51,16 @@ void main() {
       expect(capturedError!.exception, isA<VideoAppbarException>());
       final exceptionMessage = capturedError!.exception.toString();
       expect(exceptionMessage, contains('testing_error'));
-      expect(find.widgetWithIcon(IconButton,Icons.arrow_back_ios_new_outlined), findsOneWidget);
+      expect(find.widgetWithIcon(IconButton, Icons.arrow_back_ios_new_outlined),
+          findsOneWidget);
       expect(find.text('VideoAppBar body'), findsOneWidget);
       expect(find.text('Placeholder'), findsNothing);
       expect(find.byIcon(Icons.share), findsOneWidget);
       FlutterError.onError = FlutterError.dumpErrorToConsole;
     });
 
-    testWidgets('VideoAppBar displays loading indicator', (WidgetTester tester) async {
+    testWidgets('VideoAppBar displays loading indicator',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -68,12 +74,14 @@ void main() {
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
     });
 
-    testWidgets('VideoAppBar displays video from network and go to second screen', (WidgetTester tester) async {
+    testWidgets(
+        'VideoAppBar displays video from network and go to second screen',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           routes: {
-            'home' : (context) => HomeScreen(),
-            'second' : (context) => SecondScreen(),
+            'home': (context) => HomeScreen(),
+            'second': (context) => SecondScreen(),
           },
           initialRoute: 'home',
         ),
@@ -93,7 +101,8 @@ void main() {
       expect(find.text('Body'), findsOneWidget);
     });
 
-    testWidgets('VideoAppBar displays video from file', (WidgetTester tester) async {
+    testWidgets('VideoAppBar displays video from file',
+        (WidgetTester tester) async {
       final file = File('home/video.mp4');
       await tester.pumpWidget(
         MaterialApp(
@@ -131,7 +140,11 @@ class HomeScreen extends StatelessWidget {
       appBar: VideoAppBar(
         source: VideoAppBarSource.network(url: 'https://example.mp4'),
         height: 200,
-        actions: [IconButton(icon: Icon(Icons.share), onPressed: () => Navigator.pushNamed(context,'second'))],
+        actions: [
+          IconButton(
+              icon: Icon(Icons.share),
+              onPressed: () => Navigator.pushNamed(context, 'second'))
+        ],
         errorPlaceholder: Center(child: Text('Placeholder')),
         loading: Center(child: CircularProgressIndicator()),
         body: Text('Body'),
@@ -154,7 +167,9 @@ class SecondScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: VideoAppBar(
-        source: VideoAppBarSource.network(url: 'https://cmsassets.rgpub.io/sanity/files/dsfx7636/news/409ab2fc369ba5e1fe50bac10c6676d7d1365a9f.mp4'),
+        source: VideoAppBarSource.network(
+            url:
+                'https://cmsassets.rgpub.io/sanity/files/dsfx7636/news/409ab2fc369ba5e1fe50bac10c6676d7d1365a9f.mp4'),
         height: 200,
         loading: Center(child: Text('Loading')),
         gradient: LinearGradient(
@@ -166,7 +181,6 @@ class SecondScreen extends StatelessWidget {
     );
   }
 }
-
 
 class FakeVideoPlayerPlatform extends VideoPlayerPlatform {
   Completer<bool> initialized = Completer<bool>();

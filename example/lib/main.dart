@@ -7,15 +7,14 @@ void main() {
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
-  
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        'home' :(context) => const HomeScreen(),
-        'second' : (context) => const SecondScreen()
+        'home': (context) => const HomeScreen(),
+        'second': (context) => const SecondScreen()
       },
       initialRoute: 'home',
     );
@@ -23,11 +22,16 @@ class MainApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({
-    super.key
-  });
+  const HomeScreen({super.key});
 
-  static const characters = ['brimstone','phoenix','sage','sova','vyper','cypher'];
+  static const characters = [
+    'brimstone',
+    'phoenix',
+    'sage',
+    'sova',
+    'vyper',
+    'cypher'
+  ];
   static const mainColor = Color(0xFFff4655);
 
   @override
@@ -37,43 +41,34 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.black87,
         appBar: VideoAppBar(
-          source: VideoAppBarSource.asset(
-            dataSource: 'res/video/video_01.mp4'
-          ),
+          source: VideoAppBarSource.asset(dataSource: 'res/video/video_01.mp4'),
           height: 260,
           actions: [
             IconButton(
-              onPressed: null,
-              icon: Container(
-                padding: const EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                  color: mainColor,
-                  borderRadius: BorderRadius.circular(25)
-                ),
-                child: const Icon(
-                  Icons.person,
-                  size: 22,
-                  color: Colors.white,
-                ),
-              )
-            )
+                onPressed: null,
+                icon: Container(
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                      color: mainColor,
+                      borderRadius: BorderRadius.circular(25)),
+                  child: const Icon(
+                    Icons.person,
+                    size: 22,
+                    color: Colors.white,
+                  ),
+                ))
           ],
           gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.black.withOpacity(0.25),
-              Colors.black
-            ]
-          ),
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.black.withOpacity(0.25), Colors.black]),
           body: Center(
             child: Text(
               'VideoAppBar body',
               style: TextStyle(
-                fontSize: 26,
-                color: mainColor.withOpacity(0.6),
-                fontWeight: FontWeight.bold
-              ),
+                  fontSize: 26,
+                  color: mainColor.withOpacity(0.6),
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -82,19 +77,17 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             children: [
               Expanded(
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: size.height * 0.3,
                     mainAxisExtent: size.height * 0.38,
                     mainAxisSpacing: 10,
-                    crossAxisSpacing: 10
-                  ),
-                  itemCount: characters.length,
-                  itemBuilder: (_, index) {
-                    return CharacterItem(character: characters[index]);
-                  },
-                )
-              ),
+                    crossAxisSpacing: 10),
+                itemCount: characters.length,
+                itemBuilder: (_, index) {
+                  return CharacterItem(character: characters[index]);
+                },
+              )),
             ],
           ),
         ),
@@ -104,11 +97,16 @@ class HomeScreen extends StatelessWidget {
 }
 
 class SecondScreen extends StatelessWidget {
-  const SecondScreen({
-    super.key
-  });
+  const SecondScreen({super.key});
 
-  static const characters = ['brimstone','phoenix','sage','sova','vyper','cypher'];
+  static const characters = [
+    'brimstone',
+    'phoenix',
+    'sage',
+    'sova',
+    'vyper',
+    'cypher'
+  ];
   static const mainColor = Color(0xFFff4655);
 
   @override
@@ -117,25 +115,20 @@ class SecondScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.black87,
         appBar: VideoAppBar(
-          source: VideoAppBarSource.asset(
-            dataSource: 'res/video/video_02.mp4'
-          ),
+          source: VideoAppBarSource.asset(dataSource: 'res/video/video_02.mp4'),
           height: 54,
         ),
         body: Center(
-          child: TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text(
-              'Go to home',
-              style: TextStyle(fontSize: 16),
-            )
-          )
-        ),
+            child: TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text(
+                  'Go to home',
+                  style: TextStyle(fontSize: 16),
+                ))),
       ),
     );
   }
 }
-
 
 class CharacterItem extends StatelessWidget {
   const CharacterItem({
@@ -148,7 +141,7 @@ class CharacterItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
+      onTap: () {
         Navigator.pushNamed(context, 'second');
       },
       child: Column(
@@ -167,9 +160,7 @@ class CharacterItem extends StatelessWidget {
                   child: Text(
                     character.toUpperCase(),
                     style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold
-                    ),
+                        fontSize: 16, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
                 ),
