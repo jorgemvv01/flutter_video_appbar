@@ -26,7 +26,7 @@ First, add `video_appbar` as a [dependency in your pubspec.yaml file](https://fl
 
 ```yaml
 dependencies:
-  video_appbar: ^0.0.1
+  video_appbar: ^0.0.1+2
 ```
 
 
@@ -81,11 +81,17 @@ class MainApp extends StatelessWidget {
               url: 'https://github.com/jorgemvv01/flutter_video_appbar/raw/main/example/res/video/video_01.mp4'
             ),
             height: 54,
+            body: const Center(
+              child: Text(
+                'Video appbar body',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white
+                ),
+              )
+            ),
           ),
-          body: Center(
-            child: Text('Video appbar body')
-          ),
-        ),
+        )
       ),
     );
   }

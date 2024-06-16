@@ -34,7 +34,7 @@ class VideoAppBarSource {
   /// **Usage Example:**
   /// ```dart
   /// VideoAppBarSource.network(
-  ///   url: 'https://github.com/jorgemvv01/flutter_video_appbar/example/res/videos/video_01.mp4'),
+  ///   url: 'https://github.com/jorgemvv01/flutter_video_appbar/raw/main/example/res/video/video_01.mp4'),
   /// )
   /// ```
   VideoAppBarSource.network(
