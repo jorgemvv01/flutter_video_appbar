@@ -24,6 +24,11 @@ Tablet - Android         |
 
 First, add `video_appbar` as a [dependency in your pubspec.yaml file](https://flutter.dev/using-packages/).
 
+```yaml
+dependencies:
+  video_appbar: ^0.0.1
+```
+
 
 ## Dependency
 
