@@ -13,12 +13,12 @@ A Flutter package that allows playing videos within the AppBar, and customizing 
 
 Mobile - Android        |  Mobile - Android (with leading)
 :-------------------------:|:-------------------------:
-![](https://github.com/jorgemvv01/video_appbar/blob/main/res/demo_01.gif)  |  ![](https://github.com/jorgemvv01/video_appbar/blob/main/res/demo_02.gif)
+![](https://github.com/jorgemvv01/flutter_video_appbar/blob/main/res/demo_01.gif)  |  ![](https://github.com/jorgemvv01/flutter_video_appbar/blob/main/res/demo_02.gif)
 
 
 Tablet - Android         |
 :-------------------------:|
-![](https://github.com/jorgemvv01/video_appbar/blob/main/res/demo_03.gif)  |  
+![](https://github.com/jorgemvv01/flutter_video_appbar/blob/main/res/demo_03.gif)  |  
 
 ## Installation
 
@@ -78,7 +78,7 @@ class MainApp extends StatelessWidget {
         child: Scaffold(
           appBar: VideoAppBar(
             source: VideoAppBarSource.network(
-              url: 'https://github.com/jorgemvv01/video_appbar/blob/main/example/res/video/video_01.mp4'
+              url: 'https://github.com/jorgemvv01/flutter_video_appbar/blob/main/example/res/video/video_01.mp4'
             ),
             height: 54,
           ),
