@@ -1,3 +1,7 @@
+## 0.0.2+1
+
+* Updating readme
+
 ## 0.0.2
 
 * Added `volume` parameter to control video sound in AppBar.
