@@ -98,6 +98,42 @@ class MainApp extends StatelessWidget {
 }
 ```
 
+## Web - Sound behavior
+
+On the **Web**, videos that autoplay will always start **muted by default** due to browser policies.  
+To allow the user to enable sound, `VideoAppBar` includes by default a button that appears when running on Web.  
+
+- By default, `showWebUnmuteButton` is set to `true`.  
+- This shows a floating button that lets the user toggle sound on/off.  
+
+If you want to customize this button, you can provide your own widget via `unmuteButtonBuilder`:
+
+```dart
+VideoAppBar(
+  source: VideoAppBarSource.network(
+    url: 'https://github.com/jorgemvv01/flutter_video_appbar/raw/main/example/res/video/video_01.mp4'
+  ),
+  showWebUnmuteButton: true, // default is true
+  unmuteButtonBuilder: (context, isMuted, onPressed) {
+    return ElevatedButton.icon(
+      onPressed: onPressed,
+      icon: Icon(isMuted ? Icons.volume_off : Icons.volume_up),
+      label: Text(isMuted ? 'Activate' : 'Mute'),
+      style: ElevatedButton.styleFrom(
+        shape: StadiumBorder(),
+        elevation: 4,
+      ),
+    );
+  },
+  body: const Center(
+    child: Text(
+      'Custom unmute button on Web',
+      style: TextStyle(fontSize: 18, color: Colors.white),
+    ),
+  ),
+)
+
+
 ### Acknowledgements
 
 The images and videos for the demo showcasing the package functionality were taken from the official [valorant](https://playvalorant.com/) page.

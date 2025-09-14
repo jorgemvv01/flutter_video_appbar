@@ -36,17 +36,13 @@ void main() {
               leading: IconButton(
                   icon: Icon(Icons.arrow_back_ios_new_outlined),
                   onPressed: () {}),
-              gradient: LinearGradient(
-                colors: [Colors.black.withOpacity(0.5), Colors.transparent],
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-              ),
               body: Text('VideoAppBar body'),
             ),
           ),
         ),
       );
-      // Verificar que se capturó una excepción
+
+      // Capture the error thrown during widget build
       expect(capturedError, isNotNull);
       expect(capturedError!.exception, isA<VideoAppbarException>());
       final exceptionMessage = capturedError!.exception.toString();
@@ -113,11 +109,6 @@ void main() {
               actions: [IconButton(icon: Icon(Icons.share), onPressed: () {})],
               errorPlaceholder: Center(child: Text('Placeholder')),
               loading: Center(child: CircularProgressIndicator()),
-              gradient: LinearGradient(
-                colors: [Colors.black.withOpacity(0.5), Colors.transparent],
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-              ),
             ),
           ),
         ),
@@ -148,11 +139,6 @@ class HomeScreen extends StatelessWidget {
         errorPlaceholder: Center(child: Text('Placeholder')),
         loading: Center(child: CircularProgressIndicator()),
         body: Text('Body'),
-        gradient: LinearGradient(
-          colors: [Colors.black.withOpacity(0.5), Colors.transparent],
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-        ),
       ),
     );
   }
@@ -172,11 +158,6 @@ class SecondScreen extends StatelessWidget {
                 'https://cmsassets.rgpub.io/sanity/files/dsfx7636/news/409ab2fc369ba5e1fe50bac10c6676d7d1365a9f.mp4'),
         height: 200,
         loading: Center(child: Text('Loading')),
-        gradient: LinearGradient(
-          colors: [Colors.black.withOpacity(0.5), Colors.transparent],
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-        ),
       ),
     );
   }

@@ -33,7 +33,12 @@ class VideoAppBar extends StatefulWidget implements PreferredSizeWidget {
       this.gradient,
       this.body,
       this.looping = true,
-      this.onError});
+      this.volume = 0.0,
+      this.onError,
+      this.showWebUnmuteButton = true,
+      this.unmuteButtonAlignment = Alignment.bottomRight,
+      this.unmuteButtonPadding = const EdgeInsets.all(8),
+      this.unmuteButtonBuilder});
 
   /// The video source, which can be an asset, network URL, or local file.
   final VideoAppBarSource source;
@@ -65,6 +70,22 @@ class VideoAppBar extends StatefulWidget implements PreferredSizeWidget {
   /// Indicates whether the video should loop. Default is `true`.
   final bool looping;
 
+  /// Volume level of the video, ranging from 0.0 (muted) to 1.0 (maximum volume). Default is 0.0 (muted).
+  final double volume;
+
+  /// If true (default) shows an unmute button overlay on web to enable audio via user gesture.
+  final bool showWebUnmuteButton;
+
+  /// Alignment for the unmute button when shown on web (e.g. Alignment.topLeft).
+  final Alignment unmuteButtonAlignment;
+
+  /// Padding around the unmute button (distance from safe area edges).
+  final EdgeInsets unmuteButtonPadding;
+
+  /// Optional builder to render a custom unmute button.
+  /// Signature: (BuildContext context, bool isMuted, VoidCallback onPressed) => Widget
+  final Widget Function(BuildContext, bool, VoidCallback)? unmuteButtonBuilder;
+
   /// Function to be executed if an error occurs
   final Function()? onError;
 
@@ -79,6 +100,7 @@ class VideoAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _VideoAppbarState extends State<VideoAppBar> {
   late VideoPlayerController controller;
   bool hasError = false;
+  bool _isMuted = kIsWeb;
 
   @override
   void initState() {
@@ -111,7 +133,10 @@ class _VideoAppbarState extends State<VideoAppBar> {
         controller.value = VideoPlayerValue(
             duration: Duration(), errorDescription: 'testing_error');
       }
-      controller.setVolume(0).then((value) => controller.play());
+
+      controller
+          .setVolume(kIsWeb ? 0.0 : widget.volume)
+          .then((value) => controller.play());
       controller.setLooping(widget.looping);
       setState(() {});
     });
@@ -129,9 +154,10 @@ class _VideoAppbarState extends State<VideoAppBar> {
 
   @override
   void dispose() {
+    super.dispose();
+
     /// The controller is deleted before the widget is deleted.
     controller.dispose();
-    super.dispose();
   }
 
   @override
@@ -200,7 +226,54 @@ class _VideoAppbarState extends State<VideoAppBar> {
               ],
             ),
           ),
+
+          // Web unmute button (customizable position)
+          if (kIsWeb && widget.showWebUnmuteButton && widget.volume > 0)
+            Align(
+              alignment: widget.unmuteButtonAlignment,
+              child: Padding(
+                padding: widget.unmuteButtonPadding,
+                child: SafeArea(
+                  child: _buildUnmuteButton(context),
+                ),
+              ),
+            ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildUnmuteButton(BuildContext context) {
+    final isEnabled = controller.value.isInitialized;
+
+    void handlePressed() async {
+      if (!isEnabled) return;
+      if (_isMuted) {
+        await controller.setVolume(widget.volume);
+        await controller.play();
+        _isMuted = widget.volume <= 0.0;
+      } else {
+        await controller.setVolume(0.0);
+        _isMuted = true;
+      }
+      setState(() {});
+    }
+
+    if (widget.unmuteButtonBuilder != null) {
+      return GestureDetector(
+        onTap: isEnabled ? handlePressed : null,
+        child: widget.unmuteButtonBuilder!(context, _isMuted, handlePressed),
+      );
+    }
+
+    // Default built-in icon button
+    return Material(
+      color: Colors.transparent,
+      child: IconButton(
+        iconSize: 28,
+        color: Theme.of(context).primaryIconTheme.color,
+        icon: Icon(_isMuted ? Icons.volume_off : Icons.volume_up),
+        onPressed: isEnabled ? handlePressed : null,
       ),
     );
   }
