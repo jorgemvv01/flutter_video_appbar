@@ -113,6 +113,7 @@ VideoAppBar(
   source: VideoAppBarSource.network(
     url: 'https://github.com/jorgemvv01/flutter_video_appbar/raw/main/example/res/video/video_01.mp4'
   ),
+  volume: 1,
   showWebUnmuteButton: true, // default is true
   unmuteButtonBuilder: (context, isMuted, onPressed) {
     return ElevatedButton.icon(
@@ -132,6 +133,7 @@ VideoAppBar(
     ),
   ),
 )
+```
 
 
 ### Acknowledgements
